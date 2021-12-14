@@ -11,16 +11,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon'
 import { MatListModule } from '@angular/material/list';
-import {MatTableDataSource} from '@angular/material/table';
 import { RouterModule } from '@angular/router';
-import { MatTableModule } from '@angular/material/table'  
+import { MatTableModule } from '@angular/material/table';
+import { EmployeeListComponent } from './employee-list/employee-list.component'  
+import { MatSortModule } from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MainNavComponent,
-    routingComponents
+    routingComponents,
+    EmployeeListComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +36,9 @@ import { MatTableModule } from '@angular/material/table'
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    MatFormFieldModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]
