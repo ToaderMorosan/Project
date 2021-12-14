@@ -16,6 +16,8 @@ import { MatTableModule } from '@angular/material/table';
 import { EmployeeListComponent } from './employee-list/employee-list.component'  
 import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatInputModule } from '@angular/material/input';
 
 
 
@@ -38,7 +40,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatListModule,
     MatTableModule,
     MatFormFieldModule,
-    MatSortModule
+    MatSortModule,
+    MatPaginatorModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
