@@ -18,6 +18,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
+import { SkillsListComponent } from './skills-list/skills-list.component';
 
 
 
@@ -26,7 +27,8 @@ import { MatInputModule } from '@angular/material/input';
     AppComponent,
     MainNavComponent,
     routingComponents,
-    EmployeeListComponent
+    EmployeeListComponent,
+    SkillsListComponent
   ],
   imports: [
     BrowserModule,
