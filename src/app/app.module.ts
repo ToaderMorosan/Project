@@ -19,6 +19,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { SkillsListComponent } from './skills-list/skills-list.component';
+import { LoginComponent } from './login/login.component';
+import { CollectableService } from './shared/collectable.service';
 
 
 
@@ -28,7 +30,8 @@ import { SkillsListComponent } from './skills-list/skills-list.component';
     MainNavComponent,
     routingComponents,
     EmployeeListComponent,
-    SkillsListComponent
+    SkillsListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,7 @@ import { SkillsListComponent } from './skills-list/skills-list.component';
     MatPaginatorModule,
     MatInputModule
   ],
-  providers: [],
+  providers: [CollectableService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

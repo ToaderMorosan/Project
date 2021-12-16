@@ -9,24 +9,50 @@
 .sidenav .mat-toolbar {
   background: #c5c5c5;
 }
-
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
   z-index: 1;
+  background-color: #6a16e9;
 }
 
 .hidden {
   display:none;
 }
 
-.spacer{
-  flex: 1 1 auto;
-}
 
 .mat-toolbar a {
   display:inline-block;
-  margin: 0 10px;
   color:white;
   text-decoration: none;
+  flex: 1;
+  padding: 0 0 0 40px;
+}
+
+.logo {
+  color: #fff;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+.nav-items {
+
+}
+.myButton {
+  background-color: #6a16e9;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 15px;
+  padding: 9px 23px;
+  text-decoration: none;
+}
+.myButton:hover {
+  background-color: #e96a16;
+}
+.myButton:active {
+  position: relative;
+  top: 1px;
 }

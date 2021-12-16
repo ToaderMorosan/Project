@@ -1,8 +1,9 @@
 import {LiveAnnouncer} from '@angular/cdk/a11y';
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import { Component, ViewChild, OnInit} from '@angular/core';
 import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
+import { CollectableService } from '../shared/collectable.service';
 
 
 @Component({
@@ -10,23 +11,26 @@ import {MatPaginator} from '@angular/material/paginator';
   templateUrl: './skills-list.component.html',
   styleUrls: ['./skills-list.component.css']
 })
-export class SkillsListComponent implements AfterViewInit {
+export class SkillsListComponent implements OnInit {
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  dataSource: any[];
 
-  constructor(private _liveAnnouncer: LiveAnnouncer) {}
+  constructor(private _liveAnnouncer: LiveAnnouncer, private collectableService: CollectableService) {}
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+  ngOnInit(){
+    this.dataSource = this.collectableService.getCollectables();
   }
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+  // ngAfterViewInit() {
+  //   this.dataSource.sort = this.sort;
+  //   this.dataSource.paginator = this.paginator;
+  // }
+  // applyFilter(filterValue: string) {
+  //   this.dataSource.filter = filterValue.trim().toLowerCase();
+  // }
 
   /** Announce the change in sort state for assistive technology. */
   announceSortChange(sortState: Sort) {

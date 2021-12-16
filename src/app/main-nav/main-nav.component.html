@@ -1,9 +1,12 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" 
-      [ngClass]="{hidden: (isHandset$ | async)=== false}"
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    [ngClass]="{ hidden: (isHandset$ | async) === false }"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item href="#">My Profile</a>
@@ -18,14 +21,17 @@
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+        *ngIf="isHandset$ | async"
+      >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <Span>skillsset</Span>
-      <span class="spacer"></span>
-      <a href="/profile">My Profile</a>
-      <a href="/employees">All Employees</a>
-      <a href="#">All skills</a>
+      <div class="logo">SkillsSet</div>
+      <div class="nav-items">
+        <a href="/profile">My Profile</a>
+        <a href="/employees">All Employees</a>
+        <a href="/skills">All skills</a>
+        <a href="/login" class="myButton">Log In</a>
+      </div>
     </mat-toolbar>
   </mat-sidenav-content>
 </mat-sidenav-container>
