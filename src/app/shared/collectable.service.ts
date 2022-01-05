@@ -1,3 +1,4 @@
+import { Observable, of } from "rxjs";
 import { collectable } from "./collectable.model"
 
 export class CollectableService {
@@ -13,8 +14,8 @@ export class CollectableService {
         {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
         {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
     ];
-    getCollectables() {
-        return this.collectables;
+    getCollectables() : Observable<collectable[]> {
+        return of(this.collectables);
     }
 }
 
