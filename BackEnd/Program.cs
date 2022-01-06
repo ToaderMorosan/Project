@@ -15,7 +15,7 @@ builder.Services.AddDbContext<SkillContext>(options =>
 
 });
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<ISkillRepo, MockSkillRepo>();
+builder.Services.AddScoped<ISkillRepo, SqlSkillRepo>();
 
 var app = builder.Build();
 

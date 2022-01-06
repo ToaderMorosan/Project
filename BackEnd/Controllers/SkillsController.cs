@@ -20,7 +20,7 @@ namespace SkillsSet.Controllers
         [HttpGet]
         public ActionResult <IEnumerable<Skill>> GetAllSkills()
         {
-            var skillItems = _repository.GetAppSkills();
+            var skillItems = _repository.GetAllSkills();
 
             return Ok(skillItems);
         }

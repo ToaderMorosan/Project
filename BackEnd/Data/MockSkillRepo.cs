@@ -4,7 +4,7 @@ namespace SkillsSet.Data
 {
     public class MockSkillRepo : ISkillRepo
     {
-        public IEnumerable<Skill> GetAppSkills()
+        public IEnumerable<Skill> GetAllSkills()
         {
             var skills = new List<Skill>
             {

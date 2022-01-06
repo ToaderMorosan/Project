@@ -3,7 +3,7 @@ using SKillsSet.Models;
 namespace SkillsSet.Data
 {
     public interface ISkillRepo{
-        IEnumerable<Skill> GetAppSkills(); 
+        IEnumerable<Skill> GetAllSkills(); 
         Skill GetSkillById(int id);
     }
 }
