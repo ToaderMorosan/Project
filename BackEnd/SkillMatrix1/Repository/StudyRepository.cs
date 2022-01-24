@@ -1,0 +1,59 @@
+﻿using SkillMatrix1.Data;
+using SkillMatrix1.Interfaces;
+using SkillMatrix1.Models;
+
+namespace SkillMatrix1.Repository
+{
+    public class StudyRepository : IStudyRepository
+    {
+        private DataContext _context;
+        public StudyRepository(DataContext context)
+        {
+            _context = context;
+        }
+
+        public bool CreateStudy(Study study)
+        {
+            _context.Add(study);
+            return Save();
+        }
+
+        public bool DeleteStudy(Study study)
+        {
+            _context.Remove(study);
+            return Save();
+        }
+
+        public ICollection<Study> GetStudies()
+        {
+            return _context.Studies.ToList();
+        }
+
+        public ICollection<Study> GetStudiesOfAnEmployee(int employeeId)
+        {
+            return _context.Studies.Where(r => r.Employee.Id == employeeId).ToList();
+        }
+
+        public Study GetStudy(int studyId)
+        {
+            return _context.Studies.Where(r => r.Id == studyId).FirstOrDefault();
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
+        }
+
+        public bool StudyExists(int studyId)
+        {
+            return _context.Studies.Any(r => r.Id == studyId);
+        }
+
+        public bool UpdateStudy(Study study)
+        {
+            _context.Update(study);
+            return Save();
+        }
+    }
+}
