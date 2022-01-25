@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -21,6 +21,10 @@ import { MatInputModule } from '@angular/material/input';
 import { SkillsListComponent } from './skills-list/skills-list.component';
 import { LoginComponent } from './login/login.component';
 import { CollectableService } from './shared/collectable.service';
+import {BrowserAnimationsModule} from 
+    '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+
 
 
 
