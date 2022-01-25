@@ -13,10 +13,12 @@ namespace SkillMatrix1.Controllers
     {
         private readonly ISkillRepository _skillRepository;
         private readonly IMapper _mapper;
-        public SkillController(ISkillRepository skillRepository, IMapper mapper)
+        private readonly IEmployeeRepository _employeeRepository;
+        public SkillController(ISkillRepository skillRepository, IMapper mapper, IEmployeeRepository employeeRepository)
         {
             _skillRepository = skillRepository;
             _mapper = mapper;
+            _employeeRepository = employeeRepository;
         }
 
         [HttpGet]
@@ -134,6 +136,20 @@ namespace SkillMatrix1.Controllers
             }
 
             return NoContent();
+        }
+
+
+        [HttpPost("{employeeId}")]
+        public ActionResult<SkillDto> CreateSkillForEmployee(int employeeId, SkillDto skill)
+        {
+            if (!_employeeRepository.EmployeeExists(employeeId))
+            {
+                return NotFound();
+            }
+            var skillMap = _mapper.Map<Skill>(skill);
+            _skillRepository.AddSkillForEmployee(employeeId, skillMap);
+            _skillRepository.Save();
+            return Ok();
         }
 
     }

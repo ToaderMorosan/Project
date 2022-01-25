@@ -15,5 +15,12 @@
         public string email { get; set; }
         public string github { get; set; }
         public string instagram { get; set; }
+        public ICollection<StudyDto> Studies { get; set; }
+    }
+
+    public class EmployeeWithDevTools
+    {
+        public string Name { get; set; }
+        public List<DevToolDto> DevTools { get; set; }
     }
 }

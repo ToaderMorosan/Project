@@ -12,6 +12,28 @@ namespace SkillMatrix1.Repository
             _context = context;
         }
 
+        public void AddInterestForEmployee(int employeeId, Interest interest)
+        {
+            var EmployeeInterestEntity = _context.Employees.Where(a => a.Id == employeeId).FirstOrDefault();
+            var employeeInterest = new EmployeeInterest()
+            {
+                Interest = interest,
+                Employee = EmployeeInterestEntity,
+            };
+            _context.Add(employeeInterest);
+            if (employeeId == null)
+            {
+                throw new ArgumentNullException(nameof(employeeId));
+            }
+
+            if (interest == null)
+            {
+                throw new ArgumentNullException(nameof(interest));
+            }
+
+            _context.Interests.Add(interest);
+        }
+
         public bool CreateInterest(Interest interest)
         {
             _context.Add(interest);

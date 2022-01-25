@@ -12,6 +12,7 @@ namespace SkillMatrix1.Interfaces
         bool UpdateSkill(Skill skill);
         bool CreateSkill(Skill skill);
         bool DeleteSkill(Skill skill);
+        void AddSkillForEmployee(int employeeId, Skill skill);
         bool Save();
     }
 }

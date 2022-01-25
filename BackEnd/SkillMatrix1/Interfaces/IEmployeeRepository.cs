@@ -1,4 +1,5 @@
-﻿using SkillMatrix1.Models;
+﻿using SkillMatrix1.Dto;
+using SkillMatrix1.Models;
 
 namespace SkillMatrix1.Interfaces
 {
@@ -11,6 +12,9 @@ namespace SkillMatrix1.Interfaces
         bool CreateEmployee(int skillId, int InterestId, int DevToolId, Employee employee);
         bool UpdateEmployee(Employee employee);
         bool DeleteEmployee(Employee employee);
+        ICollection<Interest> GetInterestByEmployee(int employeeId);
+        ICollection<Skill> GetSkillByEmployee(int employeeId);
+        ICollection<DevTool> GetDevToolByEmployee(int employeeId);
         bool Save();
     }
 }

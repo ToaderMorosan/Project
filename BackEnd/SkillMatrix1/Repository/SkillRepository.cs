@@ -12,6 +12,28 @@ namespace SkillMatrix1.Repository
             _context = context;
         }
 
+        public void AddSkillForEmployee(int employeeId, Skill skill)
+        {
+            var EmployeeSkillEntity = _context.Employees.Where(a => a.Id == employeeId).FirstOrDefault();
+            var employeeSkill = new EmployeeSkill()
+            {
+                Skill = skill,
+                Employee = EmployeeSkillEntity,
+            };
+            _context.Add(employeeSkill);
+            if (employeeId == null)
+            {
+                throw new ArgumentNullException(nameof(employeeId));
+            }
+
+            if (skill == null)
+            {
+                throw new ArgumentNullException(nameof(employeeSkill));
+            }
+
+            _context.Skills.Add(skill);
+        }
+
         public bool CreateSkill(Skill skill)
         {
             _context.Add(skill);

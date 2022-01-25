@@ -55,5 +55,18 @@ namespace SkillMatrix1.Repository
             _context.Update(study);
             return Save();
         }
+
+        public IEnumerable<Study> GetStudiesForEmployee(int employeeId)
+        {
+            if (employeeId == null)
+            {
+                throw new ArgumentNullException(nameof(employeeId));
+            }
+
+            return _context.Studies
+                        .Where(c => c.Employee.Id == employeeId)
+                        .ToList();
+        }
+
     }
 }

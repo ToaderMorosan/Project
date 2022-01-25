@@ -12,6 +12,7 @@ namespace SkillMatrix1.Interfaces
         bool CreateStudy(Study study);
         bool UpdateStudy(Study study);
         bool DeleteStudy(Study study);
+        IEnumerable<Study> GetStudiesForEmployee(int employeeId);
         bool Save();
     }
 }

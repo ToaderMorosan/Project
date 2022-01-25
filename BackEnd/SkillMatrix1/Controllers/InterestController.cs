@@ -13,10 +13,13 @@ namespace SkillMatrix1.Controllers
     {
         private readonly IInterestRepository _interestRepository;
         private readonly IMapper _mapper;
-        public InterestController(IInterestRepository interestRepository, IMapper mapper)
+        private readonly IEmployeeRepository _employeeRepository;
+
+        public InterestController(IInterestRepository interestRepository, IMapper mapper, IEmployeeRepository employeeRepository)
         {
            _interestRepository = interestRepository;
             _mapper = mapper;
+            _employeeRepository = employeeRepository;
         }
 
         [HttpGet]
@@ -130,6 +133,20 @@ namespace SkillMatrix1.Controllers
             }
 
             return NoContent();
+        }
+
+
+        [HttpPost("{employeeId}")]
+        public ActionResult<InterestDto> CreateInterestForEmployee(int employeeId, InterestDto interest)
+        {
+            if (!_employeeRepository.EmployeeExists(employeeId))
+            {
+                return NotFound();
+            }
+            var interestMap = _mapper.Map<Interest>(interest);
+            _interestRepository.AddInterestForEmployee(employeeId, interestMap);
+            _interestRepository.Save();
+            return Ok();
         }
 
     }

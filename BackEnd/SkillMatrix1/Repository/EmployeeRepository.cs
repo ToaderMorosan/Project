@@ -1,4 +1,5 @@
 ﻿using SkillMatrix1.Data;
+using SkillMatrix1.Dto;
 using SkillMatrix1.Interfaces;
 using SkillMatrix1.Models;
 
@@ -78,6 +79,20 @@ namespace SkillMatrix1.Repository
         {
             _context.Update(employee);
             return Save();
+        }
+
+        public ICollection<Interest> GetInterestByEmployee(int employeeId)
+        {
+            return _context.EmployeeInterests.Where(i => i.EmployeeId == employeeId).Select(e => e.Interest).ToList();
+        }
+
+        public ICollection<Skill> GetSkillByEmployee(int employeeId)
+        {
+            return _context.EmployeeSkills.Where(i => i.EmployeeId == employeeId).Select(e => e.Skill).ToList();
+        }
+        public ICollection<DevTool> GetDevToolByEmployee(int employeeId)
+        {
+            return _context.EmployeeDevTools.Where(i => i.EmployeeId == employeeId).Select(e => e.DevTool).ToList();
         }
     }
 }

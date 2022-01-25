@@ -60,7 +60,7 @@ namespace SkillMatrix1.Controllers
 
 
         [HttpPost]
-        public IActionResult CreateStudy([FromQuery] int employeeId,  [FromBody] StudyDto studyCreate)
+        public IActionResult CreateStudy([FromQuery] int employeeId, [FromBody] StudyDto studyCreate)
         {
             if (studyCreate == null)
                 return BadRequest(ModelState);
@@ -81,7 +81,7 @@ namespace SkillMatrix1.Controllers
             var studyMap = _mapper.Map<Study>(studyCreate);
 
             studyMap.Employee = _employeeRepository.GetEmployee(employeeId);
-            
+
 
             if (!_studyRepository.CreateStudy(studyMap))
             {
@@ -139,6 +139,15 @@ namespace SkillMatrix1.Controllers
             }
 
             return NoContent();
+        }
+
+
+        [HttpGet("getStudyByEmployee/{employeeId}", Name = "GetStudyByEmployee")]
+        public ActionResult<IEnumerable<StudyDto>> GetStudyForEmployee(int employeeId)
+        {
+            var studiesForEmployeeFromRepo = _studyRepository.GetStudiesForEmployee(employeeId);
+            return Ok(_mapper.Map<IEnumerable<StudyDto>>(studiesForEmployeeFromRepo));
+
         }
     }
 }

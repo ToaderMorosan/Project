@@ -12,6 +12,7 @@ namespace SkillMatrix1.Interfaces
 
         bool UpdateInterest(Interest interest);
         bool DeleteInterest(Interest interest);
+        void AddInterestForEmployee(int employeeId, Interest interest);
         bool Save();
     }
 }

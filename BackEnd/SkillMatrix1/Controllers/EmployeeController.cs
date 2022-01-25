@@ -134,5 +134,34 @@ namespace SkillMatrix1.Controllers
             return NoContent();
         }
 
+        [HttpGet("Interest/{employeeId}")]
+        public IActionResult GetInterestByEmployeeId(int employeeId)
+        {
+            var interests = _mapper.Map<List<Interest>>(_employeeRepository.GetInterestByEmployee(employeeId));
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+            return Ok(interests);
+        }
+        [HttpGet("Skill/{employeeId}")]
+        public IActionResult GetSkillByEmployeeId(int employeeId)
+        {
+            var skills = _mapper.Map<List<Skill>>(_employeeRepository.GetSkillByEmployee(employeeId));
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+            return Ok(skills);
+        }
+        [HttpGet("DevTool/{employeeId}")]
+        public IActionResult GetDevToolByEmployeeId(int employeeId)
+        {
+            var devTools = _mapper.Map<List<DevTool>>(_employeeRepository.GetDevToolByEmployee(employeeId));
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+            return Ok(devTools);
+        }
+
+
     }
 }

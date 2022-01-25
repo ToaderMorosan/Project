@@ -11,6 +11,8 @@ namespace SkillMatrix1.Interfaces
         bool UpdateDevTool(DevTool decTool);
         bool CreateDevTool(DevTool devTool);
         bool DeleteDevTool(DevTool devTool);
+        void AddDevToolForEmployee(int employeeId, DevTool devTool);
+        IEnumerable<DevTool> GetDevToolsForEmployee(int employeeId);
         bool Save();
     }
 }

@@ -13,10 +13,12 @@ namespace SkillMatrix1.Controllers
     {
         private readonly IDevToolRepository _devToolRepository;
         private readonly IMapper _mapper;
-        public DevToolController(IDevToolRepository devToolRepository, IMapper mapper)
+        private readonly IEmployeeRepository _employeeRepository;
+        public DevToolController(IDevToolRepository devToolRepository, IMapper mapper, IEmployeeRepository employeeRepository)
         {
             _devToolRepository = devToolRepository;
             _mapper = mapper;
+            _employeeRepository = employeeRepository;
         }
 
         [HttpGet]
@@ -133,6 +135,30 @@ namespace SkillMatrix1.Controllers
             }
 
             return NoContent();
+        }
+
+
+        [HttpPost("{employeeId}")]
+        public ActionResult<DevToolDto> CreateDevToolForEmployee(int employeeId, DevToolDto devTool)
+        {
+            if (!_employeeRepository.EmployeeExists(employeeId))
+            {
+                return NotFound();
+            }
+            var devToolMap = _mapper.Map<DevTool>(devTool);
+            _devToolRepository.AddDevToolForEmployee(employeeId, devToolMap);
+            _devToolRepository.Save();
+            return Ok();
+        }
+
+        [HttpPost("GetDevToolsByEmployees/{employeeId}")]
+        public IActionResult GetDevToolsByEmployees(int employeeId)
+        {
+            var devTools = _mapper.Map<List<DevToolDto>>(_devToolRepository.GetDevToolsForEmployee(employeeId));
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+            return Ok(devTools);
         }
 
     }
