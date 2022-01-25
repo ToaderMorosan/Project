@@ -33,8 +33,8 @@ namespace SkillMatrix1.Controllers
             return Ok(studies);
         }
 
-        [HttpGet("{reviewId}")]
-        public IActionResult GetEmployee(int studyId)
+        [HttpGet("{studyId}")]
+        public IActionResult GetStudy(int studyId)
         {
             if (!_studyRepository.StudyExists(studyId))
                 return NotFound();
@@ -121,7 +121,7 @@ namespace SkillMatrix1.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public IActionResult DeleteStydt(int studyId)
+        public IActionResult DeleteStudy(int studyId)
         {
             if (!_studyRepository.StudyExists(studyId))
             {

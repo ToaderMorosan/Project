@@ -33,7 +33,7 @@ namespace SkillMatrix1.Controllers
         }
 
 
-        [HttpGet("{interestId} ")]
+        [HttpGet("{interestId}")]
         public IActionResult GetInterest(int interestId)
         {
             if (!_interestRepository.InterestExists(interestId))
@@ -41,7 +41,7 @@ namespace SkillMatrix1.Controllers
             var interest = _mapper.Map<InterestDto>(_interestRepository.GetInterest(interestId));
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            return Ok(interest); 
+            return Ok(interest);
         }
 
         [HttpGet("employee/{interestId}")]

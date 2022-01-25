@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SkillMatrix1.Dto;
@@ -22,6 +23,7 @@ namespace SkillMatrix1.Controllers
         }
 
         [HttpGet]
+        [EnableCors]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Skill>))]
         public IActionResult GetSkills()
         {
@@ -32,7 +34,7 @@ namespace SkillMatrix1.Controllers
         }
 
 
-        [HttpGet("{skillId} ")]
+        [HttpGet("{skillId}")]
         public IActionResult GetSkill(int skillId)
         {
             if (!_skillRepository.SkillExists(skillId))

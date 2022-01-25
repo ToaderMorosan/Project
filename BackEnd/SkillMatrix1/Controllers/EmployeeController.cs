@@ -29,7 +29,7 @@ namespace SkillMatrix1.Controllers
             return Ok(employees);
         }
 
-        [HttpGet("{employeeId} ")]
+        [HttpGet("{employeeId}")]
         public IActionResult GetEmployee(int employeeId)
         {
             if (!_employeeRepository.EmployeeExists(employeeId))

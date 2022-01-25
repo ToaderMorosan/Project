@@ -31,8 +31,7 @@ namespace SkillMatrix1.Controllers
             return Ok(devTools);
         }
 
-
-        [HttpGet("{devToolId} ")]
+        [HttpGet("{devToolId}")]
         public IActionResult GetDevTool(int devToolId)
         {
             if (!_devToolRepository.DevToolExists(devToolId))

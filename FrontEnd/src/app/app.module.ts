@@ -24,6 +24,7 @@ import { CollectableService } from './shared/collectable.service';
 import {BrowserAnimationsModule} from 
     '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -51,7 +52,8 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatSortModule,
     MatPaginatorModule,
-    MatInputModule
+    MatInputModule,
+    HttpClientModule
   ],
   providers: [CollectableService],
   bootstrap: [AppComponent]
