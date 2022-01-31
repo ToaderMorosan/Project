@@ -25,6 +25,9 @@ import {BrowserAnimationsModule} from
     '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SelectedProfileComponent } from './selected-profile/selected-profile.component';
+import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
+
 
 
 
@@ -36,7 +39,8 @@ import { HttpClientModule } from '@angular/common/http';
     routingComponents,
     EmployeeListComponent,
     SkillsListComponent,
-    LoginComponent
+    LoginComponent,
+    UpdateEmployeeComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatSortModule,
     MatPaginatorModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [CollectableService],
   bootstrap: [AppComponent]

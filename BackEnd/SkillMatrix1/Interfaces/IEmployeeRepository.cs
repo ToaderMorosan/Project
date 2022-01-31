@@ -15,6 +15,7 @@ namespace SkillMatrix1.Interfaces
         ICollection<Interest> GetInterestByEmployee(int employeeId);
         ICollection<Skill> GetSkillByEmployee(int employeeId);
         ICollection<DevTool> GetDevToolByEmployee(int employeeId);
+/*        public Employee GetAuth(UserLogin userLogin);*/
         bool Save();
     }
 }

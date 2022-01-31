@@ -1,7 +1,13 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using SkillMatrix1.Data;
 using SkillMatrix1.Interfaces;
+using SkillMatrix1.Models;
 using SkillMatrix1.Repository;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -11,6 +17,14 @@ builder.Services.AddCors(options =>
                       builder =>
                       {
                           builder.WithOrigins("http://localhost:4200");
+                      });
+
+    options.AddPolicy(name: "AllOrigins",
+                      builder =>
+                      {
+                          builder.AllowAnyMethod();
+                          builder.AllowAnyOrigin();
+                          builder.AllowAnyHeader();
                       });
 });
 // Add services to the container.
@@ -29,7 +43,6 @@ builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -40,9 +53,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors(MyAllowSpecificOrigins);
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseCors("AllOrigins");
+}
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

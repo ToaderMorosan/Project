@@ -14,14 +14,13 @@ namespace SkillMatrix1.Controllers
         private readonly IInterestRepository _interestRepository;
         private readonly IMapper _mapper;
         private readonly IEmployeeRepository _employeeRepository;
-
+        [ActivatorUtilitiesConstructor]
         public InterestController(IInterestRepository interestRepository, IMapper mapper, IEmployeeRepository employeeRepository)
         {
            _interestRepository = interestRepository;
             _mapper = mapper;
             _employeeRepository = employeeRepository;
         }
-
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Interest>))]
         public IActionResult GetInterests()
@@ -31,8 +30,6 @@ namespace SkillMatrix1.Controllers
                 return BadRequest(ModelState);
             return Ok(interests);
         }
-
-
         [HttpGet("{interestId}")]
         public IActionResult GetInterest(int interestId)
         {
@@ -53,20 +50,17 @@ namespace SkillMatrix1.Controllers
                 return BadRequest();
             return Ok(employees);
         }
-
-
-
         [HttpPost]
         public IActionResult CreateInterest([FromBody] InterestDto interestCreate)
         {
             if (interestCreate == null)
                 return BadRequest(ModelState);
 
-            var skills = _interestRepository.GetInterests()
+            var interests = _interestRepository.GetInterests()
                 .Where(c => c.Name.Trim().ToUpper() == interestCreate.Name.TrimEnd().ToUpper())
                 .FirstOrDefault();
 
-            if (skills != null)
+            if (interests != null)
             {
                 ModelState.AddModelError("", "Interest already exists");
                 return StatusCode(422, ModelState);
@@ -74,15 +68,14 @@ namespace SkillMatrix1.Controllers
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            var skillMap = _mapper.Map<Interest>(interestCreate);
-            if (!_interestRepository.CreateInterest(skillMap))
+            var interestMap = _mapper.Map<Interest>(interestCreate);
+            if (!_interestRepository.CreateInterest(interestMap))
             {
                 ModelState.AddModelError("", "Something went wrong while savin");
                 return StatusCode(500, ModelState);
             }
             return Ok("Successfully created");
         }
-
         [HttpPut("{interestId}")]
         public IActionResult UpdateInterest(int interestId, [FromBody] InterestDto updatedInterest)
         {
@@ -108,14 +101,11 @@ namespace SkillMatrix1.Controllers
 
             return NoContent();
         }
-
-
-
         [HttpDelete("{interestId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public IActionResult DeleteDevTool(int interestId)
+        public IActionResult DeleteInterest(int interestId)
         {
             if (!_interestRepository.InterestExists(interestId))
             {
@@ -134,8 +124,6 @@ namespace SkillMatrix1.Controllers
 
             return NoContent();
         }
-
-
         [HttpPost("{employeeId}")]
         public ActionResult<InterestDto> CreateInterestForEmployee(int employeeId, InterestDto interest)
         {
@@ -148,6 +136,5 @@ namespace SkillMatrix1.Controllers
             _interestRepository.Save();
             return Ok();
         }
-
     }
 }

@@ -9,6 +9,7 @@ namespace SkillMatrix1.Models
         public int Id { get; set; }
 
         public string Name { get; set; }
+/*        public string Password { get; set; }*/
 
         public string Ocupation { get; set; }
         public string Description { get; set; }
@@ -20,7 +21,6 @@ namespace SkillMatrix1.Models
         public string github { get; set; }
         public string instagram { get; set; }
 
-        //asdsad
         public ICollection<Study> Studies { get; set; }
 
         public ICollection<EmployeeInterest> EmployeeInterests { get; set; }

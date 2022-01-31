@@ -68,5 +68,21 @@ namespace SkillMatrix1.Repository
                         .ToList();
         }
 
+
+        public void AddStudyForEmployee(int employeeId, Study study)
+        {
+            if (employeeId == null)
+            {
+                throw new ArgumentNullException(nameof(employeeId));
+            }
+
+            if (study == null)
+            {
+                throw new ArgumentNullException(nameof(study));
+            }
+            study.Employee =  _context.Employees.Where(e => e.Id == employeeId).FirstOrDefault();
+            _context.Studies.Add(study);
+        }
+
     }
 }

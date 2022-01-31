@@ -14,7 +14,7 @@ import { Input} from '@angular/core'
 })
 export class EmployeeListComponent implements AfterViewInit {
   @Input('ELEMENT_DATA')  ELEMENT_DATA!:  EmployeeReports[];
-  displayedColumns: string[] = ['id', 'name', 'ocupation','phoneNumber','address','email','github','instagram'];
+  displayedColumns: string[] = ['id', 'name', 'ocupation','phoneNumber','address','email','github','instagram', "click"];
   dataSource= new MatTableDataSource<EmployeeReports>(this.ELEMENT_DATA);
 
   constructor(private _liveAnnouncer: LiveAnnouncer, private service:EmployeeListService) {}

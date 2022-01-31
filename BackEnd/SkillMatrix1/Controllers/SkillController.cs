@@ -32,8 +32,6 @@ namespace SkillMatrix1.Controllers
                 return BadRequest(ModelState);
             return Ok(skills);
         }
-
-
         [HttpGet("{skillId}")]
         public IActionResult GetSkill(int skillId)
         {
@@ -44,7 +42,6 @@ namespace SkillMatrix1.Controllers
                 return BadRequest(ModelState);
             return Ok(skill);
         }
-
         [HttpGet("employee/{skillId}")]
         public IActionResult GetEmployeeBySkillId(int skillId)
         {
@@ -54,7 +51,6 @@ namespace SkillMatrix1.Controllers
                 return BadRequest();
             return Ok(employees);
         }
-
         [HttpPost]
         public IActionResult CreateSkill( [FromBody] SkillDto skillCreate)
         {
@@ -73,16 +69,12 @@ namespace SkillMatrix1.Controllers
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-
             var skillMap = _mapper.Map<Skill>(skillCreate);
-
-
             if (!_skillRepository.CreateSkill(skillMap))
             {
                 ModelState.AddModelError("", "Something went wrong while savin");
                 return StatusCode(500, ModelState);
             }
-
             return Ok("Successfully created");
 
         }

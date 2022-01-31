@@ -20,7 +20,6 @@ namespace SkillMatrix1.Controllers
             _mapper = mapper;
             _employeeRepository = employeeRepository;
         }
-
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<DevTool>))]
         public IActionResult GetDevTools()
@@ -30,7 +29,6 @@ namespace SkillMatrix1.Controllers
                 return BadRequest(ModelState);
             return Ok(devTools);
         }
-
         [HttpGet("{devToolId}")]
         public IActionResult GetDevTool(int devToolId)
         {
@@ -41,7 +39,6 @@ namespace SkillMatrix1.Controllers
                 return BadRequest(ModelState);
             return Ok(devTool);
         }
-
         [HttpGet("employee/{devToolId}")]
         public IActionResult GetEmployeeByDevToolId(int devToolId)
         {
@@ -51,8 +48,6 @@ namespace SkillMatrix1.Controllers
                 return BadRequest();
             return Ok(devTools);
         }
-
-
         [HttpPost]
         public IActionResult CreateSkill([FromBody] DevToolDto devToolCreate)
         {
@@ -62,56 +57,41 @@ namespace SkillMatrix1.Controllers
             var devTools = _devToolRepository.GetDevTools()
                 .Where(c => c.Name.Trim().ToUpper() == devToolCreate.Name.TrimEnd().ToUpper())
                 .FirstOrDefault();
-
             if (devTools != null)
             {
                 ModelState.AddModelError("", "Skill already exists");
                 return StatusCode(422, ModelState);
             }
-
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-
             var devToolMap = _mapper.Map<DevTool>(devToolCreate);
-
 
             if (!_devToolRepository.CreateDevTool(devToolMap))
             {
                 ModelState.AddModelError("", "Something went wrong while savin");
                 return StatusCode(500, ModelState);
             }
-
             return Ok("Successfully created");
-
         }
-
-
         [HttpPut("{devToolId}")]
         public IActionResult UpdateDevTool(int devToolId, [FromBody] DevToolDto updatedDevTool)
         {
             if (updatedDevTool == null)
                 return BadRequest(ModelState);
-
             if (devToolId != updatedDevTool.Id)
                 return BadRequest(ModelState);
-
             if (!_devToolRepository.DevToolExists(devToolId))
                 return NotFound();
-
             if (!ModelState.IsValid)
                 return BadRequest();
-
             var devToolMap = _mapper.Map<DevTool>(updatedDevTool);
-
             if (!_devToolRepository.UpdateDevTool(devToolMap))
             {
                 ModelState.AddModelError("", "Something went wrong updating category");
                 return StatusCode(500, ModelState);
             }
-
             return NoContent();
         }
-
         [HttpDelete("{devToolId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
@@ -122,20 +102,15 @@ namespace SkillMatrix1.Controllers
             {
                 return NotFound();
             }
-
             var devToolToDelete = _devToolRepository.GetDevTool(devToolId);
-
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-
             if (!_devToolRepository.DeleteDevTool(devToolToDelete))
             {
                 ModelState.AddModelError("", "Something went wrong deleting category");
             }
-
             return NoContent();
         }
-
 
         [HttpPost("{employeeId}")]
         public ActionResult<DevToolDto> CreateDevToolForEmployee(int employeeId, DevToolDto devTool)
@@ -154,7 +129,6 @@ namespace SkillMatrix1.Controllers
         public IActionResult GetDevToolsByEmployees(int employeeId)
         {
             var devTools = _mapper.Map<List<DevToolDto>>(_devToolRepository.GetDevToolsForEmployee(employeeId));
-
             if (!ModelState.IsValid)
                 return BadRequest();
             return Ok(devTools);

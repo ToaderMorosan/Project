@@ -94,5 +94,14 @@ namespace SkillMatrix1.Repository
         {
             return _context.EmployeeDevTools.Where(i => i.EmployeeId == employeeId).Select(e => e.DevTool).ToList();
         }
+
+/*        public Employee GetAuth(UserLogin userLogin)
+        {
+            Employee employee = _context.Employees.FirstOrDefault(o => o.email.Equals
+            (userLogin.Username, StringComparison.OrdinalIgnoreCase) && o.Password.Equals
+            (userLogin.Password));
+            return employee;
+        }*/
+
     }
 }

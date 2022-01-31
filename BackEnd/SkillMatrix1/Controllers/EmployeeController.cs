@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using SkillMatrix1.Dto;
 using SkillMatrix1.Interfaces;
@@ -82,13 +82,12 @@ namespace SkillMatrix1.Controllers
 
         }
 
-
         [HttpPut("{employeeId}")]
+        [EnableCors]
         public IActionResult UpdateEmployee(int employeeId, [FromBody] EmployeeDto updatedEmployee)
         {
             if (updatedEmployee == null)
                 return BadRequest(ModelState);
-
             if (employeeId != updatedEmployee.Id)
                 return BadRequest(ModelState);
 
@@ -111,9 +110,6 @@ namespace SkillMatrix1.Controllers
 
 
         [HttpDelete("{EmployeeId}")]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(404)]
         public IActionResult DeleteEmployee(int employeeId)
         {
             if (!_employeeRepository.EmployeeExists(employeeId))
@@ -121,12 +117,12 @@ namespace SkillMatrix1.Controllers
                 return NotFound();
             }
 
-            var devToolToDelete = _employeeRepository.GetEmployee(employeeId);
+            var employeeToDelete = _employeeRepository.GetEmployee(employeeId);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (!_employeeRepository.DeleteEmployee(devToolToDelete))
+            if (!_employeeRepository.DeleteEmployee(employeeToDelete))
             {
                 ModelState.AddModelError("", "Something went wrong deleting category");
             }

@@ -9,7 +9,6 @@ namespace SkillMatrix1.Data
         {
 
         }
-
         public DbSet<DevTool> DevTools { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Interest> Interests { get; set; }
@@ -31,8 +30,6 @@ namespace SkillMatrix1.Data
                 .HasOne(e => e.Interest)
                 .WithMany(ei => ei.EmployeeInterests)
                 .HasForeignKey(i => i.InterestId);
-
-
             modelBuilder.Entity<EmployeeSkill>()
                 .HasKey(ei => new { ei.EmployeeId, ei.SkillId });
             modelBuilder.Entity<EmployeeSkill>()
@@ -43,8 +40,6 @@ namespace SkillMatrix1.Data
                 .HasOne(e => e.Skill)
                 .WithMany(ei => ei.EmployeeSkills)
                 .HasForeignKey(i => i.SkillId);
-
-
             modelBuilder.Entity<EmployeeDevTool>()
                 .HasKey(ei => new { ei.EmployeeId, ei.DevToolId });
             modelBuilder.Entity<EmployeeDevTool>()
@@ -56,6 +51,5 @@ namespace SkillMatrix1.Data
                 .WithMany(ei => ei.EmployeeDevTool)
                 .HasForeignKey(i => i.DevToolId);
         }
-
     }
 }
