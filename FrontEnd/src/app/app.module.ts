@@ -27,6 +27,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SelectedProfileComponent } from './selected-profile/selected-profile.component';
 import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
+import { CreateComponent } from './create/create.component';
 
 
 
@@ -40,7 +41,8 @@ import { UpdateEmployeeComponent } from './update-employee/update-employee.compo
     EmployeeListComponent,
     SkillsListComponent,
     LoginComponent,
-    UpdateEmployeeComponent
+    UpdateEmployeeComponent,
+    CreateComponent
   ],
   imports: [
     BrowserModule,

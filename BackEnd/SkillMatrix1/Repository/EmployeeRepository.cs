@@ -14,7 +14,13 @@ namespace SkillMatrix1.Repository
             _context = context;
         }
 
-        public bool CreateEmployee(int SkillId, int InterestId, int DevToolId, Employee employee)
+        public bool CreateEmployee(Employee employee)
+        {
+            _context.Add(employee);
+
+            return Save();
+        }
+        public bool CreateEmployeeWithSkillInterestDevTool(int SkillId, int InterestId, int DevToolId, Employee employee)
         {
             var EmployeeSkillEntity = _context.Skills.Where(a => a.Id == SkillId).FirstOrDefault();
             var EmployeeInterestEntity = _context.Interests.Where(a => a.Id == InterestId).FirstOrDefault();
@@ -94,14 +100,6 @@ namespace SkillMatrix1.Repository
         {
             return _context.EmployeeDevTools.Where(i => i.EmployeeId == employeeId).Select(e => e.DevTool).ToList();
         }
-
-/*        public Employee GetAuth(UserLogin userLogin)
-        {
-            Employee employee = _context.Employees.FirstOrDefault(o => o.email.Equals
-            (userLogin.Username, StringComparison.OrdinalIgnoreCase) && o.Password.Equals
-            (userLogin.Password));
-            return employee;
-        }*/
 
     }
 }

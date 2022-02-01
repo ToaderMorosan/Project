@@ -11,6 +11,11 @@ namespace SkillMatrix1.Repository
         {
             _context = context;
         }
+        public class Item
+        {
+            public string Name { get; set; }
+            public int Occurence { get; set; }
+        }
 
         public void AddSkillForEmployee(int employeeId, Skill skill)
         {
@@ -56,9 +61,42 @@ namespace SkillMatrix1.Repository
             return _context.Skills.Where(i => i.Id == Id).FirstOrDefault();
         }
 
-        public ICollection<Skill> GetSkills()
+        public List<Item> GetSkills()
         {
-            return _context.Skills.ToList();
+            List<Skill> list = _context.Skills.ToList();
+/*            List<string> listOfSkills = new List<string>();
+            var skills =_context.Skills.ToList();
+            foreach (var skill in list)
+            {
+                listOfSkills.Add(skill.Name);
+            }
+            List<string> distinctSkills = (List<string>)listOfSkills.Distinct()
+                .ToList();*/
+            List<Item> skilsOccurences = new List<Item>();
+            /*            var k = 0;
+                        foreach (var skill in listOfSkills)
+                        {
+                            if (distinctSkills.Contains(skill))
+                            {
+                                k++;
+                            }
+                        }*/
+
+            foreach (var line in list.GroupBy(info => info.Name)
+                                    .Select(group => new {
+                                        Name = group.Key,
+                                        Count = group.Count()
+                                    })
+                                    .OrderBy(x => x.Name))
+            {
+                Console.WriteLine("{0} {1}", line.Name, line.Count);
+                Item item = new Item();
+                item.Name = line.Name;
+                item.Occurence = line.Count;
+                skilsOccurences.Add(item);
+            }
+
+            return skilsOccurences;
         }
 
         public bool Save()

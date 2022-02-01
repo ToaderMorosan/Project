@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using SkillMatrix1.Dto;
 using SkillMatrix1.Interfaces;
 using SkillMatrix1.Models;
+using static SkillMatrix1.Repository.SkillRepository;
 
 namespace SkillMatrix1.Controllers
 {
@@ -27,7 +28,7 @@ namespace SkillMatrix1.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<Skill>))]
         public IActionResult GetSkills()
         {
-            var skills = _mapper.Map<List<SkillDto>>(_skillRepository.GetSkills());
+            var skills = _skillRepository.GetSkills();
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             return Ok(skills);
@@ -57,15 +58,6 @@ namespace SkillMatrix1.Controllers
             if (skillCreate == null)
                 return BadRequest(ModelState);
 
-            var skills = _skillRepository.GetSkills()
-                .Where(c => c.Name.Trim().ToUpper() == skillCreate.Name.TrimEnd().ToUpper())
-                .FirstOrDefault();
-
-            if (skills != null)
-            {
-                ModelState.AddModelError("", "Skill already exists");
-                return StatusCode(422, ModelState);
-            }
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

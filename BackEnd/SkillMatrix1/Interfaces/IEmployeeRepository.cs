@@ -7,9 +7,10 @@ namespace SkillMatrix1.Interfaces
     {
         ICollection<Employee> GetEmployees();
         Employee GetEmployee(int id);
-        Employee GetEmployee(string name);
+/*        Employee GetEmployee(string name);*/
         bool EmployeeExists(int employeeId);
-        bool CreateEmployee(int skillId, int InterestId, int DevToolId, Employee employee);
+        bool CreateEmployeeWithSkillInterestDevTool(int skillId, int InterestId, int DevToolId, Employee employee);
+        bool CreateEmployee(Employee employee);
         bool UpdateEmployee(Employee employee);
         bool DeleteEmployee(Employee employee);
         ICollection<Interest> GetInterestByEmployee(int employeeId);

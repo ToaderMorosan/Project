@@ -11,11 +11,10 @@ namespace SkillMatrix.Tests
         {
             this.fixture = fixture;
         }
-
+ 
         [Fact]
         public void GetInterests()
         {
-
             // Use a clean instance of the context to run the test
             var sut = new InterestRepository(fixture.DataContext);
             //Act
@@ -54,27 +53,23 @@ namespace SkillMatrix.Tests
 
             //Assert
             Xunit.Assert.Equal(3, interests.Count());
+            
         }
-
         [Fact]
         public void UpdateInterest()
         {
-
             var sut = new InterestRepository(fixture.DataContext);
-            
             var newInterest = new Interest
             {
                 Id = 2,
-                Name = "Soccer"
+                Name = "UpdatedInterest",
             };
             //Act
             sut.UpdateInterest(newInterest);
-            var interest = sut.GetInterest(2);
+            var employee = sut.GetInterest(2);
             //Assert
-            Xunit.Assert.Equal(interest.Name, newInterest.Name);
+            Xunit.Assert.Equal(employee.Name, newInterest.Name);
+
         }
-
-
-
     }
 }

@@ -40,7 +40,7 @@ namespace SkillMatrix1.Controllers
             return Ok(employee);
         }
 
-        [HttpGet("{employeeName} ")]
+/*        [HttpGet("{employeeName} ")]
         public IActionResult GetEmployee(string employeeName)
         {
             var employee = _mapper.Map<EmployeeDto>(_employeeRepository.GetEmployee(employeeName));
@@ -48,10 +48,10 @@ namespace SkillMatrix1.Controllers
                 return BadRequest(ModelState);
             return Ok(employee);
         }
+*/
 
-
-        [HttpPost]
-        public IActionResult CreateEmployee([FromQuery] int skillId, [FromQuery] int interestId, [FromQuery] int devToolId, [FromBody] EmployeeDto employeeCreate)
+        [HttpPost("CreateEmployeeWithSkillInterestDevTooleEmployee")]
+        public IActionResult CreatCreateEmployeeWithSkillInterestDevTooleEmployee([FromQuery] int skillId, [FromQuery] int interestId, [FromQuery] int devToolId, [FromBody] EmployeeDto employeeCreate)
         {
             if (employeeCreate == null)
                 return BadRequest(ModelState);
@@ -72,14 +72,44 @@ namespace SkillMatrix1.Controllers
             var employeeMap = _mapper.Map<Employee>(employeeCreate);
 
 
-            if (!_employeeRepository.CreateEmployee(skillId, interestId, devToolId, employeeMap))
+            if (!_employeeRepository.CreateEmployeeWithSkillInterestDevTool(skillId, interestId, devToolId, employeeMap))
             {
                 ModelState.AddModelError("", "Something went wrong while savin");
                 return StatusCode(500, ModelState);
             }
 
             return Ok("Successfully created");
+        }
 
+        [HttpPost]
+        public IActionResult CreateEmployee( [FromBody] EmployeeDto employeeCreate)
+        {
+            if (employeeCreate == null)
+                return BadRequest(ModelState);
+
+            var employees = _employeeRepository.GetEmployees()
+                .Where(c => c.Name.Trim().ToUpper() == employeeCreate.Name.TrimEnd().ToUpper())
+                .FirstOrDefault();
+
+            if (employees != null)
+            {
+                ModelState.AddModelError("", "Employee already exists");
+                return StatusCode(422, ModelState);
+            }
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var employeeMap = _mapper.Map<Employee>(employeeCreate);
+
+
+            if (!_employeeRepository.CreateEmployee(employeeMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while savin");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Successfully created");
         }
 
         [HttpPut("{employeeId}")]
@@ -109,7 +139,7 @@ namespace SkillMatrix1.Controllers
         }
 
 
-        [HttpDelete("{EmployeeId}")]
+        [HttpDelete("{employeeId}")]
         public IActionResult DeleteEmployee(int employeeId)
         {
             if (!_employeeRepository.EmployeeExists(employeeId))

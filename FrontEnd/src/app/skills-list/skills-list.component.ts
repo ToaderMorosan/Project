@@ -3,8 +3,6 @@ import { Component, ViewChild, OnInit,AfterViewInit} from '@angular/core';
 import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
-import { CollectableService } from '../shared/collectable.service';
-import { collectable } from '../shared/collectable.model';
 import { SkillsListService } from './skills-list.service';
 import { SkillsReports } from './skillsReports';
 import { Input} from '@angular/core'
@@ -17,7 +15,7 @@ import { Input} from '@angular/core'
 })
 export class SkillsListComponent implements OnInit {
   @Input('ELEMENT_DATA')  ELEMENT_DATA!:  SkillsReports[];
-  displayedColumns: string[] = ['id', 'name', 'proficiency'];
+  displayedColumns: string[] = ['name', 'occurence'];
   dataSource= new MatTableDataSource<SkillsReports>(this.ELEMENT_DATA);
 
   constructor(private _liveAnnouncer: LiveAnnouncer, private service:SkillsListService) {}
@@ -26,6 +24,7 @@ export class SkillsListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit(){
+
     this.getAllSkills();
   }
   ngAfterViewInit() {

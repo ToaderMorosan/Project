@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from 'src/app/shared/shared.service';
 import { ActivatedRoute } from '@angular/router';
-import { Employee, Study } from '../shared/Employee';
+import { Employee } from '../shared/Employee';
 @Component({
   selector: 'app-update-employee',
   templateUrl: './update-employee.component.html',
@@ -10,7 +10,6 @@ import { Employee, Study } from '../shared/Employee';
 export class UpdateEmployeeComponent implements OnInit {
   title = 'httpGet Example';
   employee = new Employee();
-  study = new Study();
   msgTrue : boolean =  false;
   constructor(
     private SharedService: SharedService) { }

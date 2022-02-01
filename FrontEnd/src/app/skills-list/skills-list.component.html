@@ -13,17 +13,6 @@
       class="mat-elevation-z8"
     >
       <!-- Position Column -->
-      <ng-container matColumnDef="id">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          mat-sort-header
-          sortActionDescription="Sort by id"
-        >
-          Id
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-      </ng-container>
   
       <!-- Name Column -->
       <ng-container matColumnDef="name">
@@ -39,16 +28,16 @@
       </ng-container>
   
       <!-- proficiency Column -->
-      <ng-container matColumnDef="proficiency">
+      <ng-container matColumnDef="occurence">
         <th
           mat-header-cell
           *matHeaderCellDef
           mat-sort-header
-          sortActionDescription="Sort by proficiency"
+          sortActionDescription="Sort by occurence"
         >
-        Proficiency
+        Count
         </th>
-        <td mat-cell *matCellDef="let element">{{ element.proficiency }}%</td>
+        <td mat-cell *matCellDef="let element">{{ element.occurence }}</td>
       </ng-container>
   
   

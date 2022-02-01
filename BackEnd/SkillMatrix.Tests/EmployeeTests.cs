@@ -5,10 +5,10 @@ using Xunit;
 
 namespace SkillMatrix.Tests
 {
-    public class EmployeeTests : IClassFixture<SeedDataFixture>
+    public class EmployeeTests : IClassFixture<SeedDataFixture2>
     {
-        SeedDataFixture fixture;
-        public EmployeeTests(SeedDataFixture fixture)
+        SeedDataFixture2 fixture;
+        public EmployeeTests(SeedDataFixture2 fixture)
         {
             this.fixture = fixture;
         }
@@ -41,7 +41,7 @@ namespace SkillMatrix.Tests
                 address = "address"
             };
             //Act
-            sut.CreateEmployee(1, 1, 1, newEmployee);
+            sut.CreateEmployee( newEmployee);
             var employees = sut.GetEmployees();
 
             //Assert

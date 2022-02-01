@@ -7,7 +7,6 @@ namespace SkillMatrix1.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
-
         }
         public DbSet<DevTool> DevTools { get; set; }
         public DbSet<Employee> Employees { get; set; }

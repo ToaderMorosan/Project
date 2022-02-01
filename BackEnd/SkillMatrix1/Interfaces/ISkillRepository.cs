@@ -4,7 +4,7 @@ namespace SkillMatrix1.Interfaces
 {
     public interface ISkillRepository
     {
-        ICollection<Skill> GetSkills();
+        List<Repository.SkillRepository.Item> GetSkills();
         Skill GetSkill(int Id);
         ICollection<Employee> GetEmployeeBySkill(int skillId);
         bool SkillExists(int id);
